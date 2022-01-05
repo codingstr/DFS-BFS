@@ -14,8 +14,6 @@ def solution(numbers, target):
             print("asdf")
         queue.append((s+numbers[l-1], l+1))
         queue.append((s-numbers[l-1], l+1))
-        print('s = '+str(s))
-        print('l = '+str(l))
 
     return answer
 
