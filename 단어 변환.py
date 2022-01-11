@@ -4,12 +4,10 @@ from collections import deque
 
 def solution(begin, target, words) :
     answer = 0
-    distance = 0
-    queue = deque([begin])
-    words.append(begin)
+    queue = deque([[begin, 0]])
 
     def mutableWords(before) :
-        mutableWordsArr = words if begin == before else words[:words.index(before)]+words[words.index(before)+1:]
+        mutableWordsArr = words[:] if begin == before else words[:words.index(before)]+words[words.index(before)+1:]
         for word in mutableWordsArr[:] :
             equalNum = 0
             for i in range(len(word)) :
@@ -18,17 +16,17 @@ def solution(begin, target, words) :
         return mutableWordsArr
 
     while queue :
-        distance += 1
-        begin = queue.popleft()
-        words.remove(begin)
+        begin, distance = queue.popleft()
         mutableWordsArr = mutableWords(begin)
+        print(begin)
         if begin == target :
-            distance -= 1
             if answer == 0 or answer > distance :
                 answer = distance
         else :
             for word in mutableWordsArr :
-                queue.append(word)
+                if word in words : words.remove(word)
+                queue.append([word, distance+1])
+        print(list(queue))
     
 
     return answer
