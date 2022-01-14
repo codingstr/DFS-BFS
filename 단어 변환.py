@@ -16,11 +16,11 @@ def solution(begin, target, words) :
         # 아니라면 다음으로 탐색할 수 있는 단어를 queue에 append
         else :
             # 처리중인 단어에서 변환할 수 있는 단어들
-            mutableWordsArr = words[:]
-            for word in mutableWordsArr[:] :
+            mutableWordsArr = words.copy()
+            for word in mutableWordsArr.copy() :
                 equalNum = 0
-                for i in range(len(word)) :
-                    if begin[i] == word[i] : equalNum += 1
+                for i, char in enumerate(word) :
+                    if begin[i] == char : equalNum += 1
                 if not equalNum == len(word)-1 : mutableWordsArr.remove(word)
 
             for word in mutableWordsArr :
